@@ -17,8 +17,17 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "home", element: <Home /> },
-      { path: "all-products", element: <AllProducts /> },
-      { path: "product/:id", element: <ProductDetails /> },
+      {
+        path: "all-products",
+        element: <AllProducts />,
+        loader: async () => fetch("http://localhost:5000/api/v1/products"),
+      },
+      {
+        path: "products/:id",
+        element: <ProductDetails />,
+        loader: async ({ params }) =>
+          fetch(`http://localhost:5000/api/v1/products/${params.id}`),
+      },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       { path: ":id/cart", element: <Cart /> },

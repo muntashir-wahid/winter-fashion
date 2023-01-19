@@ -1,9 +1,14 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
+import ProductCardContainer from "../../components/Cards/ProductCard/ProductCardContainer";
 
 const AllProducts = () => {
+  const data = useLoaderData();
+  const { products } = data?.data;
+
   return (
     <section>
-      <h1>Hello from the All products page</h1>
+      <ProductCardContainer products={products} />
     </section>
   );
 };
