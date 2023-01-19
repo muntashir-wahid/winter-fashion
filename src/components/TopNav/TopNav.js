@@ -11,7 +11,7 @@ const navLinks = [
   {
     id: 2,
     name: "All Products",
-    link: "/products",
+    link: "/all-products",
   },
 ];
 
@@ -73,7 +73,7 @@ const TopNav = () => {
         )}
         {user?._id && (
           <Fragment>
-            <Link to="/orders" className="mr-4">
+            <Link to={`${user?._id}/cart`} className="mr-4">
               <div className="indicator">
                 <span className="indicator-item badge badge-secondary">0</span>
                 <BsCart4 className="text-3xl" />
@@ -91,7 +91,7 @@ const TopNav = () => {
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <Link className="justify-center" to="/orders">
+                  <Link to={`/${user?._id}/orders`} className="justify-center">
                     Orders
                   </Link>
                 </li>
