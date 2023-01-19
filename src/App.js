@@ -1,9 +1,12 @@
+import { Fragment } from "react";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/routes/routes";
+
 function App() {
   return (
-    <div>
-      <h1>Hello world</h1>
-      <button className="btn btn-primary">Lets start</button>
-    </div>
+    <Fragment>
+      <RouterProvider router={router} />
+    </Fragment>
   );
 }
 
