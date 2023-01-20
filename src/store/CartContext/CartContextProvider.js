@@ -6,6 +6,7 @@ import { CurrUserContext } from "../CurrUser/CurrUserProvider";
 const contextDefaultValue = {
   cart: [],
   addToCartHandler(cartProduct) {},
+  deleteFromCartHandler(cartItem) {},
 };
 
 export const CartContext = createContext(contextDefaultValue);
@@ -37,9 +38,25 @@ const CartContextProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
-          console.log(data);
           setCart((prevCart) => {
             const updatedCart = [...prevCart, data?.data?.cartItem];
+            return updatedCart;
+          });
+        }
+      });
+  };
+
+  const deleteFromCartHandler = (cartItemId) => {
+    fetch(`http://localhost:5000/api/v1/carts/${cartItemId}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          setCart((prevCart) => {
+            const updatedCart = prevCart.filter(
+              (el) => el._id !== data?.data?.item?._id
+            );
             return updatedCart;
           });
         }
@@ -49,6 +66,7 @@ const CartContextProvider = ({ children }) => {
   const contextValue = {
     cart,
     addToCartHandler,
+    deleteFromCartHandler,
   };
 
   return (

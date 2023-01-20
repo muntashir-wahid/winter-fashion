@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const CartItem = ({ itemId }) => {
+const CartItem = ({ itemId, onDeleteFromCart }) => {
   const [cartItem, setCartItem] = useState(null);
 
   useEffect(() => {
@@ -11,7 +11,6 @@ const CartItem = ({ itemId }) => {
         setCartItem(data.data.product);
       });
   }, [itemId]);
-  console.log(cartItem);
 
   return (
     <li>
@@ -28,7 +27,12 @@ const CartItem = ({ itemId }) => {
           </div>
           <div>
             <button className="btn btn-primary btn-sm">Checkout</button>
-            <button className="btn btn-primary btn-sm">Delete</button>
+            <button
+              onClick={onDeleteFromCart}
+              className="btn btn-primary btn-sm"
+            >
+              Delete
+            </button>
           </div>
         </div>
       )}
