@@ -16,8 +16,8 @@ const navLinks = [
 ];
 
 const TopNav = () => {
-  // const user = null;
-  const user = { _id: 123 };
+  const user = null;
+  // const user = { _id: 123 };
 
   const navMenu = navLinks.map((el) => (
     <li key={el.id}>
