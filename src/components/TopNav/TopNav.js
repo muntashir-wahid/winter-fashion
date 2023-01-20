@@ -102,14 +102,26 @@ const TopNav = () => {
                 tabIndex={0}
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <li>
-                  <Link
-                    to={`/${currUser?._id}/orders`}
-                    className="justify-center"
-                  >
-                    Orders
-                  </Link>
-                </li>
+                {/* Link for normal user to see orders */}
+
+                {currUser.role === "user" && (
+                  <li>
+                    <Link
+                      to={`/${currUser?._id}/orders`}
+                      className="justify-center"
+                    >
+                      Orders
+                    </Link>
+                  </li>
+                )}
+                {currUser.role === "admin" && (
+                  <li>
+                    <Link to={`/dashboard`} className="justify-center">
+                      Dashboard
+                    </Link>
+                  </li>
+                )}
+
                 <li>
                   <button onClick={logOutHandler} className="btn btn-ghost">
                     Logout

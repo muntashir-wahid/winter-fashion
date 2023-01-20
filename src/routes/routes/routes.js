@@ -1,5 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashBoard from "../../layout/DashBoard";
 import Main from "../../layout/Main";
+import AddCustomer from "../../pages/AddCustomer/AddCustomer";
+import AddProduct from "../../pages/AddProduct/AddProduct";
+import AdminOrderList from "../../pages/AdminOrderList/AdminOrderList";
+import AdminProductList from "../../pages/AdminProductList/AdminProductList";
+import AllCustomers from "../../pages/AllCustomers/AllCustomers";
 import AllProducts from "../../pages/AllProducts/AllProducts";
 import Cart from "../../pages/Cart/Cart";
 import CustomerOrders from "../../pages/CustomerOrders/CustomerOrders";
@@ -40,6 +46,32 @@ const router = createBrowserRouter([
         ),
       },
       { path: ":id/orders", element: <CustomerOrders /> },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashBoard />,
+    children: [
+      {
+        index: true,
+        element: <AllCustomers />,
+      },
+      {
+        path: "/dashboard/orders-list",
+        element: <AdminOrderList />,
+      },
+      {
+        path: "/dashboard/product-list",
+        element: <AdminProductList />,
+      },
+      {
+        path: "/dashboard/add-costomer",
+        element: <AddCustomer />,
+      },
+      {
+        path: "/dashboard/add-product",
+        element: <AddProduct />,
+      },
     ],
   },
 ]);
