@@ -8,7 +8,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const fromSubmitHandler = (data) => {
+  const formSubmitHandler = (data) => {
     const user = { ...data };
 
     const formData = new FormData();
@@ -46,7 +46,7 @@ const Register = () => {
   return (
     <form
       className="max-w-2xl mx-auto p-10"
-      onSubmit={handleSubmit(fromSubmitHandler)}
+      onSubmit={handleSubmit(formSubmitHandler)}
     >
       {/* User name input */}
       <div className="form-control w-full max-w-xs">
@@ -140,7 +140,7 @@ const Register = () => {
         )}
       </div>
 
-      <input className="btn btn-primary" type="submit" valie="register" />
+      <input className="btn btn-primary" type="submit" value="register" />
     </form>
   );
 };
