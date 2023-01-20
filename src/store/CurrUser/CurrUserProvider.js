@@ -7,28 +7,31 @@ const CurrUserProvider = ({ children }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [isUserLoading, setIsUserLoading] = useState(true);
 
+  useEffect(() => {
+    const userId = localStorage.getItem("currUser");
+
+    if (userId) {
+      fetch(`http://localhost:5000/api/v1/users/${userId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === "success") {
+            const user = data?.data.user;
+            setCurrUser(user);
+            setIsUserLoading(false);
+          }
+        });
+    }
+  }, [isUpdated]);
+
+  console.log(currUser);
+
   const contextValue = {
     currUser,
     setCurrUser,
     setIsUpdated,
     setIsUserLoading,
+    isUserLoading,
   };
-
-  useEffect(() => {
-    const userId = localStorage.getItem("currUser");
-
-    fetch(`http://localhost:5000/api/v1/users/${userId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === "success") {
-          const user = data?.data.user;
-          setCurrUser(user);
-          setIsUserLoading(false);
-        }
-      });
-  }, [isUpdated]);
-
-  console.log(currUser);
 
   return (
     <CurrUserContext.Provider value={contextValue}>

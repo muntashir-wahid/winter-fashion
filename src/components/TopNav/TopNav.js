@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
+import { useContext } from "react";
+import { CurrUserContext } from "../../store/CurrUser/CurrUserProvider";
 
 const navLinks = [
   {
@@ -16,8 +18,14 @@ const navLinks = [
 ];
 
 const TopNav = () => {
-  const user = null;
-  // const user = { _id: 123 };
+  const { currUser, setCurrUser } = useContext(CurrUserContext);
+  const navigate = useNavigate();
+
+  const logOutHandler = () => {
+    setCurrUser(null);
+    localStorage.removeItem("currUser");
+    navigate("/");
+  };
 
   const navMenu = navLinks.map((el) => (
     <li key={el.id}>
@@ -66,14 +74,14 @@ const TopNav = () => {
         <ul className="menu menu-horizontal px-1">{navMenu}</ul>
       </div>
       <div className="navbar-end">
-        {!user?._id && (
+        {!currUser?._id && (
           <Link to="/login" className="btn btn-ghost">
             Get Login
           </Link>
         )}
-        {user?._id && (
+        {currUser?._id && (
           <Fragment>
-            <Link to={`${user?._id}/cart`} className="mr-4">
+            <Link to={`${currUser?._id}/cart`} className="mr-4">
               <div className="indicator">
                 <span className="indicator-item badge badge-secondary">0</span>
                 <BsCart4 className="text-3xl" />
@@ -83,7 +91,7 @@ const TopNav = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src="https://placeimg.com/80/80/people" alt="User" />
+                  <img src={currUser?.picture} alt="User" />
                 </div>
               </label>
               <ul
@@ -91,12 +99,17 @@ const TopNav = () => {
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <Link to={`/${user?._id}/orders`} className="justify-center">
+                  <Link
+                    to={`/${currUser?._id}/orders`}
+                    className="justify-center"
+                  >
                     Orders
                   </Link>
                 </li>
                 <li>
-                  <button className="btn btn-ghost">Logout</button>
+                  <button onClick={logOutHandler} className="btn btn-ghost">
+                    Logout
+                  </button>
                 </li>
               </ul>
             </div>
