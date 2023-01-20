@@ -1,9 +1,16 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
 import { CurrUserContext } from "../../store/CurrUser/CurrUserProvider";
 
 const Login = () => {
-  const { setCurrUser, setIsUpdated } = useContext(CurrUserContext);
+  const { setCurrUser, setIsUpdated, setIsUserLoading } =
+    useContext(CurrUserContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  console.log(from);
 
   const {
     register,
@@ -25,8 +32,10 @@ const Login = () => {
         if (data.status === "success") {
           const user = data?.data.user;
           setCurrUser(user);
+          setIsUserLoading(false);
           setIsUpdated(true);
           localStorage.setItem("currUser", user._id);
+          navigate(from, { replace: true });
         }
       })
       .catch((err) => console.log(err.message))

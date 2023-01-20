@@ -23,8 +23,6 @@ const CurrUserProvider = ({ children }) => {
     }
   }, [isUpdated]);
 
-  console.log(currUser);
-
   const contextValue = {
     currUser,
     setCurrUser,

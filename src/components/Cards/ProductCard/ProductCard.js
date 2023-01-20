@@ -1,11 +1,22 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../../store/CartContext/CartContextProvider";
+import { CurrUserContext } from "../../../store/CurrUser/CurrUserProvider";
 
 const ProductCard = ({ productData }) => {
-  const user = { _id: 112 };
-  // const user = null;
+  const { currUser } = useContext(CurrUserContext);
+  const { addToCartHandler } = useContext(CartContext);
 
   const { _id, name, picture, price, isAvailable } = productData;
+
+  const cartProductHandler = (cartItemId) => {
+    const cartData = {
+      productId: cartItemId,
+      userId: currUser._id,
+    };
+    addToCartHandler(cartData);
+  };
 
   return (
     <article className="card bg-base-100 shadow-xl">
@@ -21,10 +32,15 @@ const ProductCard = ({ productData }) => {
         </h2>
         <p>Price:{price}BDT</p>
         <div className="card-actions justify-end">
-          {user?._id && (
-            <button className="btn btn-primary">Add to Cart</button>
+          {currUser?._id && (
+            <button
+              onClick={cartProductHandler.bind(null, productData._id)}
+              className="btn btn-primary"
+            >
+              Add to Cart
+            </button>
           )}
-          {!user?._id && (
+          {!currUser?._id && (
             <Link to="/login" className="btn btn-primary">
               Add to Cart
             </Link>

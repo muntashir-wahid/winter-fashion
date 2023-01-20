@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { useContext } from "react";
 import { CurrUserContext } from "../../store/CurrUser/CurrUserProvider";
+import { CartContext } from "../../store/CartContext/CartContextProvider";
 
 const navLinks = [
   {
@@ -19,6 +20,7 @@ const navLinks = [
 
 const TopNav = () => {
   const { currUser, setCurrUser } = useContext(CurrUserContext);
+  const { cart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const logOutHandler = () => {
@@ -83,7 +85,9 @@ const TopNav = () => {
           <Fragment>
             <Link to={`${currUser?._id}/cart`} className="mr-4">
               <div className="indicator">
-                <span className="indicator-item badge badge-secondary">0</span>
+                <span className="indicator-item badge badge-secondary">
+                  {cart?.length}
+                </span>
                 <BsCart4 className="text-3xl" />
               </div>
             </Link>
