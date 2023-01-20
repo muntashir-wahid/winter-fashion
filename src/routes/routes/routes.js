@@ -55,6 +55,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <AllCustomers />,
+        loader: async () => fetch("http://localhost:5000/api/v1/users"),
       },
       {
         path: "/dashboard/orders-list",
@@ -63,6 +64,7 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/product-list",
         element: <AdminProductList />,
+        loader: async () => fetch("http://localhost:5000/api/v1/products"),
       },
       {
         path: "/dashboard/add-costomer",

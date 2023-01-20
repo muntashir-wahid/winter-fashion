@@ -5,7 +5,6 @@ import { CurrUserContext } from "../../store/CurrUser/CurrUserProvider";
 
 const DashboardSideNav = () => {
   const { currUser } = useContext(CurrUserContext);
-  console.log(currUser);
 
   return (
     <aside className="drawer-side">

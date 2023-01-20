@@ -1,9 +1,15 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
 const AllCustomers = () => {
+  const loadedData = useLoaderData();
+  console.log(loadedData);
+
   return (
     <div>
-      <h1>Weclone to all customers</h1>
+      {loadedData?.data?.users.map((user) => (
+        <p key={user._id}>{user.name}</p>
+      ))}
     </div>
   );
 };
