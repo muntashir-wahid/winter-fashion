@@ -1,5 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import SecondaryHeading from "../../components/Headings/SecondaryHeading/SecondaryHeading";
+import FromErrorText from "../../components/Wrappers/FormWrapper/FromErrorText";
+import FromWrapper from "../../components/Wrappers/FormWrapper/FromWrapper";
+import SectionHeaderWrapper from "../../components/Wrappers/SectionHeaderWrapper/SectionHeaderWrapper";
+import SectionWrapper from "../../components/Wrappers/SectionWrapper/SectionWrapper";
 
 const AddCustomer = () => {
   const {
@@ -44,104 +49,112 @@ const AddCustomer = () => {
   };
 
   return (
-    <form
-      className="max-w-2xl mx-auto p-10"
-      onSubmit={handleSubmit(formSubmitHandler)}
-    >
-      {/* User name input */}
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Your Name</span>
-        </label>
-        <input
-          {...register("name", {
-            required: "You have to register with your name",
-          })}
-          type="text"
-          placeholder="ex:John Doe"
-          className="input input-bordered w-full max-w-xs"
-        />
-        {errors?.name && (
-          <label className="label">
-            <span className="label-text-alt">{errors?.name?.message}</span>
-          </label>
-        )}
-      </div>
+    <SectionWrapper>
+      <SectionHeaderWrapper>
+        <SecondaryHeading>Add a New Customer</SecondaryHeading>
+      </SectionHeaderWrapper>
+      <FromWrapper className="max-w-xl">
+        <form onSubmit={handleSubmit(formSubmitHandler)}>
+          {/* User name input */}
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Customer Name</span>
+            </label>
+            <input
+              {...register("name", {
+                required: "A customer must have a name",
+              })}
+              type="text"
+              placeholder="ex:John Doe"
+              className="input input-bordered w-full"
+            />
+            {errors?.name && (
+              <label className="label">
+                <FromErrorText message={errors?.name?.message} />
+              </label>
+            )}
+          </div>
 
-      {/* User phone number input */}
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Your Phone Number</span>
-        </label>
-        <input
-          {...register("phoneNum", {
-            required: "You have to register with your phone number",
-            minLength: {
-              value: 11,
-              message: "Please provide a valid Bangladeshi phone number",
-            },
-            maxLength: {
-              value: 11,
-              message: "Please provide a valid Bangladeshi phone number",
-            },
-          })}
-          type="text"
-          placeholder="ex:01xxxxxxxxx"
-          className="input input-bordered w-full max-w-xs"
-        />
-        {errors?.phoneNum && (
-          <label className="label">
-            <span className="label-text-alt">{errors?.phoneNum?.message}</span>
-          </label>
-        )}
-      </div>
+          {/* User phone number input */}
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Customer Phone Number</span>
+            </label>
+            <input
+              {...register("phoneNum", {
+                required: "A customer must have a phone number",
+                minLength: {
+                  value: 11,
+                  message: "Please provide a valid Bangladeshi phone number",
+                },
+                maxLength: {
+                  value: 11,
+                  message: "Please provide a valid Bangladeshi phone number",
+                },
+              })}
+              type="text"
+              placeholder="ex:01xxxxxxxxx"
+              className="input input-bordered w-full"
+            />
+            {errors?.phoneNum && (
+              <label className="label">
+                <FromErrorText message={errors?.phoneNum?.message} />
+              </label>
+            )}
+          </div>
 
-      {/* User password input */}
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Your Password</span>
-        </label>
-        <input
-          {...register("password", {
-            required: "You have to register with your password",
-            minLength: {
-              value: 6,
-              message: "Password must be more or equal 6 charecters",
-            },
-          })}
-          type="password"
-          placeholder="ex: abc1234"
-          className="input input-bordered w-full max-w-xs"
-        />
-        {errors?.password && (
-          <label className="label">
-            <span className="label-text-alt">{errors?.password?.message}</span>
-          </label>
-        )}
-      </div>
+          {/* User password input */}
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Password</span>
+            </label>
+            <input
+              {...register("password", {
+                required: "Customer must have a password for further login",
+                minLength: {
+                  value: 6,
+                  message: "Password must be more or equal 6 charecters",
+                },
+              })}
+              type="password"
+              placeholder="ex:abc1234"
+              className="input input-bordered w-full"
+            />
+            {errors?.password && (
+              <label className="label">
+                <FromErrorText message={errors?.password?.message} />
+              </label>
+            )}
+          </div>
 
-      {/* User photo input */}
+          {/* User photo input */}
 
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Pick your photo</span>
-        </label>
-        <input
-          {...register("photo", {
-            required: "You have to register with your photo",
-          })}
-          type="file"
-          className="file-input file-input-bordered w-full max-w-xs"
-        />
-        {errors?.photo && (
-          <label className="label">
-            <span className="label-text-alt">{errors?.photo?.message}</span>
-          </label>
-        )}
-      </div>
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Customer photo</span>
+            </label>
+            <input
+              {...register("photo", {
+                required: "Customer must have a photo",
+              })}
+              type="file"
+              className="file-input file-input-bordered w-full"
+            />
+            {errors?.photo && (
+              <label className="label">
+                <FromErrorText message={errors?.photo?.message} />
+              </label>
+            )}
+          </div>
 
-      <input className="btn btn-primary" type="submit" value="add customer" />
-    </form>
+          <input
+            className="btn btn-primary mt-4"
+            type="submit"
+            value="Add Customer"
+          />
+        </form>
+      </FromWrapper>
+    </SectionWrapper>
   );
 };
 

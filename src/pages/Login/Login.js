@@ -112,7 +112,7 @@ const Login = () => {
           <input className="btn btn-primary mt-4" type="submit" value="Login" />
         </form>
         <p className="mt-2">
-          New to <strong>Winter Fashirn</strong>? Plese
+          New to <strong>Winter Fashion</strong>? Plese
           <Link className="btn btn-link p-0 pl-1 lowercase" to="/register">
             register.
           </Link>

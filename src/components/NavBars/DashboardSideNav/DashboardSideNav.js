@@ -29,9 +29,6 @@ const DashboardSideNav = () => {
           <Link to="/dashboard/orders-list">All Orders</Link>
         </li>
         <li>
-          <Link to="/dashboard/product-list">All Products</Link>
-        </li>
-        <li>
           <Link to="/dashboard/add-costomer">Add a Customer</Link>
         </li>
         <li>

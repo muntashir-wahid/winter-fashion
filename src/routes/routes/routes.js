@@ -4,7 +4,6 @@ import Main from "../../layout/Main";
 import AddCustomer from "../../pages/AddCustomer/AddCustomer";
 import AddProduct from "../../pages/AddProduct/AddProduct";
 import AdminOrderList from "../../pages/AdminOrderList/AdminOrderList";
-import AdminProductList from "../../pages/AdminProductList/AdminProductList";
 import AllCustomers from "../../pages/AllCustomers/AllCustomers";
 import AllProducts from "../../pages/AllProducts/AllProducts";
 import Cart from "../../pages/Cart/Cart";
@@ -61,11 +60,6 @@ const router = createBrowserRouter([
         path: "/dashboard/orders-list",
         element: <AdminOrderList />,
         loader: async () => fetch("http://localhost:5000/api/v1/orders"),
-      },
-      {
-        path: "/dashboard/product-list",
-        element: <AdminProductList />,
-        loader: async () => fetch("http://localhost:5000/api/v1/products"),
       },
       {
         path: "/dashboard/add-costomer",

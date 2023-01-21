@@ -11,7 +11,6 @@ const ProductCard = ({ productData }) => {
   const { addToCartHandler } = useContext(CartContext);
 
   const { _id, name, picture, price, isAvailable, ratings } = productData;
-  console.log(productData);
 
   const cartProductHandler = (cartItemId) => {
     const cartData = {

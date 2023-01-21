@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ListItemWrapper from "../../components/Wrappers/ListItemWrapper/ListItemWrapper";
 
-const OrderItem = ({ productId }) => {
+const AdminOrderItem = ({ customerName, productId }) => {
   const [orderItem, setorderItem] = useState(null);
 
   useEffect(() => {
@@ -17,16 +17,14 @@ const OrderItem = ({ productId }) => {
       {orderItem && (
         <ListItemWrapper className="justify-between items-center text-sm md:text-base gap-2">
           <div>
-            <img
-              className="h-16 md:h-20 xl:h-24 rounded-lg"
-              src={orderItem.picture}
-              alt={orderItem.name}
-            />
-          </div>
-          <div>
+            <p>Product Name:</p>
             <h3 className="md:font-medium">{orderItem.name}</h3>
           </div>
           <div>
+            <p>Customer Name:</p>
+            <h3 className="md:font-medium">{customerName}</h3>
+          </div>
+          <div className="">
             <p>Price: {orderItem.price}BDT</p>
             <p>Delivery Cost: {orderItem.deliveryCost}BDT</p>
             <p className="md:font-medium">
@@ -39,4 +37,4 @@ const OrderItem = ({ productId }) => {
   );
 };
 
-export default OrderItem;
+export default AdminOrderItem;
