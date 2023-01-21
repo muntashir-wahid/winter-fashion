@@ -26,13 +26,16 @@ const router = createBrowserRouter([
       {
         path: "all-products",
         element: <AllProducts />,
-        loader: async () => fetch("http://localhost:5000/api/v1/products"),
+        loader: async () =>
+          fetch("https://winter-fashion-server.vercel.app/api/v1/products"),
       },
       {
         path: "products/:id",
         element: <ProductDetails />,
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/products/${params.id}`),
+          fetch(
+            `https://winter-fashion-server.vercel.app/api/v1/products/${params.id}`
+          ),
       },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
@@ -54,12 +57,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <AllCustomers />,
-        loader: async () => fetch("http://localhost:5000/api/v1/users"),
+        loader: async () =>
+          fetch("https://winter-fashion-server.vercel.app/api/v1/users"),
       },
       {
         path: "/dashboard/orders-list",
         element: <AdminOrderList />,
-        loader: async () => fetch("http://localhost:5000/api/v1/orders"),
+        loader: async () =>
+          fetch("https://winter-fashion-server.vercel.app/api/v1/orders"),
       },
       {
         path: "/dashboard/add-costomer",

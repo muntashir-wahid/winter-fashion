@@ -35,13 +35,16 @@ const AddCustomer = () => {
           user.picture = imageData.data.display_url;
 
           // User Reagistration
-          fetch("http://localhost:5000/api/v1/users/register", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(user),
-          })
+          fetch(
+            "https://winter-fashion-server.vercel.app/api/v1/users/register",
+            {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(user),
+            }
+          )
             .then((res) => res.json())
             .then((data) => console.log(data));
         }

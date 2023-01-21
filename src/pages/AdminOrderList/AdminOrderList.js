@@ -15,7 +15,7 @@ const AdminOrderList = () => {
         <SecondaryHeading>All Order</SecondaryHeading>
       </SectionHeaderWrapper>
       <ul>
-        {orders.length &&
+        {orders.length > 0 &&
           orders?.map((order) => (
             <AdminOrderItem
               key={order._id}

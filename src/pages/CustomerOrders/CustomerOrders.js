@@ -13,7 +13,9 @@ const CustomerOrders = () => {
 
   useEffect(() => {
     if (currUser?._id) {
-      fetch(`http://localhost:5000/api/v1/orders?customerId=${currUser?._id}`)
+      fetch(
+        `https://winter-fashion-server.vercel.app/api/v1/orders?customerId=${currUser?._id}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data?.status === "success") {
@@ -32,7 +34,7 @@ const CustomerOrders = () => {
         </p>
       </SectionHeaderWrapper>
       <ul>
-        {orders.length &&
+        {orders.length > 0 &&
           orders?.map((order) => (
             <OrderItem key={order._id} productId={order.productId} />
           ))}

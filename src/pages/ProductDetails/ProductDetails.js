@@ -1,12 +1,25 @@
 import React from "react";
+import { useContext } from "react";
 import { ImStarFull, ImStarHalf } from "react-icons/im";
 import { MdRateReview } from "react-icons/md";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { CurrUserContext } from "../../store/CurrUser/CurrUserProvider";
+import { CartContext } from "../../store/CartContext/CartContextProvider";
 
 const ProductDetails = () => {
+  const { currUser } = useContext(CurrUserContext);
+  const { addToCartHandler } = useContext(CartContext);
   const loadedData = useLoaderData();
-  const { name, picture, price, ratings, reviews, deliveryCost } =
+  const { _id, name, picture, price, ratings, reviews, deliveryCost } =
     loadedData?.data?.product;
+
+  const cartProductHandler = () => {
+    const cartData = {
+      productId: _id,
+      userId: currUser._id,
+    };
+    addToCartHandler(cartData);
+  };
 
   return (
     <section>
@@ -39,6 +52,20 @@ const ProductDetails = () => {
                 <span>Reviews: </span>
                 <span>{reviews}</span>
                 <MdRateReview />
+              </div>
+              <div className="mt-6">
+                {currUser?._id ? (
+                  <button
+                    onClick={cartProductHandler}
+                    className="btn btn-primary"
+                  >
+                    Add to Cart
+                  </button>
+                ) : (
+                  <Link className="btn btn-primary" to="/login">
+                    Get Login
+                  </Link>
+                )}
               </div>
             </div>
           </div>

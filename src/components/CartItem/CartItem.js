@@ -6,7 +6,7 @@ const CartItem = ({ itemId, onDeleteFromCart, onCheckOutPorduct }) => {
   const [cartItem, setCartItem] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/products/${itemId}`)
+    fetch(`https://winter-fashion-server.vercel.app/api/v1/products/${itemId}`)
       .then((res) => res.json())
       .then((data) => {
         setCartItem(data.data.product);

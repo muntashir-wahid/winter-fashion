@@ -18,7 +18,9 @@ const CartContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (currUser?._id) {
-      fetch(`http://localhost:5000/api/v1/carts?userId=${currUser._id}`)
+      fetch(
+        `https://winter-fashion-server.vercel.app/api/v1/carts?userId=${currUser._id}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.status === "success") {
@@ -29,7 +31,7 @@ const CartContextProvider = ({ children }) => {
   }, [currUser]);
 
   const addToCartHandler = (cartItem) => {
-    fetch("http://localhost:5000/api/v1/carts", {
+    fetch("https://winter-fashion-server.vercel.app/api/v1/carts", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -48,9 +50,12 @@ const CartContextProvider = ({ children }) => {
   };
 
   const deleteFromCartHandler = (cartItemId) => {
-    fetch(`http://localhost:5000/api/v1/carts/${cartItemId}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://winter-fashion-server.vercel.app/api/v1/carts/${cartItemId}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
@@ -71,7 +76,7 @@ const CartContextProvider = ({ children }) => {
       customerId: currUser._id,
     };
 
-    fetch("http://localhost:5000/api/v1/orders", {
+    fetch("https://winter-fashion-server.vercel.app/api/v1/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -79,7 +84,11 @@ const CartContextProvider = ({ children }) => {
       body: JSON.stringify(orderedProduct),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if (data?.status === "success") {
+          deleteFromCartHandler(cartId);
+        }
+      });
   };
 
   const contextValue = {

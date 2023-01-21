@@ -35,7 +35,7 @@ const AddProduct = () => {
           product.picture = imageData.data.display_url;
 
           // User Reagistration
-          fetch("http://localhost:5000/api/v1/products", {
+          fetch("https://winter-fashion-server.vercel.app/api/v1/products", {
             method: "POST",
             headers: {
               "content-type": "application/json",

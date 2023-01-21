@@ -24,7 +24,7 @@ const Login = () => {
 
   const formSubmitHandler = (data) => {
     // User login
-    fetch("http://localhost:5000/api/v1/users/login", {
+    fetch("https://winter-fashion-server.vercel.app/api/v1/users/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",

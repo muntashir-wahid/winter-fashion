@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import CartItem from "../../components/CartItem/CartItem";
 import SecondaryHeading from "../../components/Headings/SecondaryHeading/SecondaryHeading";
 import SectionHeaderWrapper from "../../components/Wrappers/SectionHeaderWrapper/SectionHeaderWrapper";
@@ -22,20 +23,35 @@ const Cart = () => {
         </p>
       </SectionHeaderWrapper>
 
-      <ul>
-        {cart.map((cartItem) => (
-          <CartItem
-            key={cartItem._id}
-            itemId={cartItem.productId}
-            onDeleteFromCart={deleteFromCartHandler.bind(null, cartItem._id)}
-            onCheckOutPorduct={checkoutProductHandler.bind(
-              null,
-              cartItem._id,
-              cartItem.productId
-            )}
-          />
-        ))}
-      </ul>
+      {cart.length === 0 && (
+        <div className="max-w-md mx-auto py-12">
+          <h1 className="text-2xl font-medium text-center">
+            Please add some product to your cart from our exclusive collections
+          </h1>
+          <div className="flex justify-center mt-4">
+            <Link to="/all-products" className="btn btn-primary">
+              Shop now
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {cart.length > 0 && (
+        <ul>
+          {cart.map((cartItem) => (
+            <CartItem
+              key={cartItem._id}
+              itemId={cartItem.productId}
+              onDeleteFromCart={deleteFromCartHandler.bind(null, cartItem._id)}
+              onCheckOutPorduct={checkoutProductHandler.bind(
+                null,
+                cartItem._id,
+                cartItem.productId
+              )}
+            />
+          ))}
+        </ul>
+      )}
     </SectionWrapper>
   );
 };

@@ -5,7 +5,9 @@ const AdminOrderItem = ({ customerName, productId }) => {
   const [orderItem, setorderItem] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/products/${productId}`)
+    fetch(
+      `https://winter-fashion-server.vercel.app/api/v1/products/${productId}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setorderItem(data.data.product);

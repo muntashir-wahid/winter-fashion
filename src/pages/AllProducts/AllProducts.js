@@ -12,11 +12,10 @@ const AllProducts = () => {
   return (
     <SectionWrapper>
       <SectionHeaderWrapper>
-        <SecondaryHeading>Watch Out All Collections</SecondaryHeading>
+        <SecondaryHeading>Explore our all Collections</SecondaryHeading>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus iste
-          libero natus beatae eos. Ad exercitationem facere necessitatibus error
-          minus optio sequi fugit ea.
+          We have some excellent and high-quality winter clothes collections.
+          You can shop from the collection. We ensure comfortable to wear.
         </p>
       </SectionHeaderWrapper>
       <ProductCardContainer products={products} />
