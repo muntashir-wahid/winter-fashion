@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useEffect } from "react";
 import { createContext, useState } from "react";
+import { toast } from "react-hot-toast";
 import { CurrUserContext } from "../CurrUser/CurrUserProvider";
 
 const contextDefaultValue = {
@@ -50,6 +51,7 @@ const CartContextProvider = ({ children }) => {
   };
 
   const deleteFromCartHandler = (cartItemId) => {
+    toast("Please wait!Working on it...");
     fetch(
       `https://winter-fashion-server.vercel.app/api/v1/carts/${cartItemId}`,
       {
