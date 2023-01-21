@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import SecondaryHeading from "../../components/Headings/SecondaryHeading/SecondaryHeading";
+import FromErrorText from "../../components/Wrappers/FormWrapper/FromErrorText";
+import FromWrapper from "../../components/Wrappers/FormWrapper/FromWrapper";
+import SectionHeaderWrapper from "../../components/Wrappers/SectionHeaderWrapper/SectionHeaderWrapper";
+import SectionWrapper from "../../components/Wrappers/SectionWrapper/SectionWrapper";
 import { CurrUserContext } from "../../store/CurrUser/CurrUserProvider";
 
 const Login = () => {
@@ -42,64 +47,78 @@ const Login = () => {
   };
 
   return (
-    <form
-      className="max-w-2xl mx-auto p-10"
-      onSubmit={handleSubmit(formSubmitHandler)}
-    >
-      {/* User phone number input */}
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Your Phone Number</span>
-        </label>
-        <input
-          {...register("phoneNum", {
-            required: "You have to input a phone number for login",
-            minLength: {
-              value: 11,
-              message: "Please provide a valid Bangladeshi phone number",
-            },
-            maxLength: {
-              value: 11,
-              message: "Please provide a valid Bangladeshi phone number",
-            },
-          })}
-          type="text"
-          placeholder="ex:01xxxxxxxxx"
-          className="input input-bordered w-full max-w-xs"
-        />
-        {errors?.phoneNum && (
-          <label className="label">
-            <span className="label-text-alt">{errors?.phoneNum?.message}</span>
-          </label>
-        )}
-      </div>
+    <SectionWrapper className="min-h-screen">
+      <SectionHeaderWrapper>
+        <SecondaryHeading>Log in Fast</SecondaryHeading>
+        <p>
+          Please log in with your credential and buy some high-quality clothes.
+        </p>
+      </SectionHeaderWrapper>
+      <FromWrapper className="lg:max-w-xl">
+        <form onSubmit={handleSubmit(formSubmitHandler)}>
+          {/* User phone number input */}
 
-      {/* User password input */}
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Your Password</span>
-        </label>
-        <input
-          {...register("password", {
-            required: "You have to inpur password for login",
-            minLength: {
-              value: 6,
-              message: "Password must be more or equal 6 charecters",
-            },
-          })}
-          type="password"
-          placeholder="ex: abc1234"
-          className="input input-bordered w-full max-w-xs"
-        />
-        {errors?.password && (
-          <label className="label">
-            <span className="label-text-alt">{errors?.password?.message}</span>
-          </label>
-        )}
-      </div>
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Your Phone Number</span>
+            </label>
+            <input
+              {...register("phoneNum", {
+                required: "You have to input a phone number for login",
+                minLength: {
+                  value: 11,
+                  message: "Please provide a valid Bangladeshi phone number",
+                },
+                maxLength: {
+                  value: 11,
+                  message: "Please provide a valid Bangladeshi phone number",
+                },
+              })}
+              type="text"
+              placeholder="ex:01xxxxxxxxx"
+              className="input input-bordered w-full"
+            />
+            {errors?.phoneNum && (
+              <label className="label">
+                <FromErrorText message={errors?.phoneNum?.message} />
+              </label>
+            )}
+          </div>
 
-      <input className="btn btn-primary" type="submit" value="Login" />
-    </form>
+          {/* User password input */}
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Your Password</span>
+            </label>
+            <input
+              {...register("password", {
+                required: "You have to inpur password for login",
+                minLength: {
+                  value: 6,
+                  message: "Password must be more or equal 6 charecters",
+                },
+              })}
+              type="password"
+              placeholder="ex: abc1234"
+              className="input input-bordered w-full"
+            />
+            {errors?.password && (
+              <label className="label">
+                <FromErrorText message={errors?.password?.message} />
+              </label>
+            )}
+          </div>
+
+          <input className="btn btn-primary mt-6" type="submit" value="Login" />
+        </form>
+        <p className="mt-2">
+          New to Winter Fashirn? Plese
+          <Link className="btn btn-link p-0 pl-1 lowercase" to="/register">
+            register.
+          </Link>
+        </p>
+      </FromWrapper>
+    </SectionWrapper>
   );
 };
 
