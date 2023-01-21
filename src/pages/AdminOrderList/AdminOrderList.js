@@ -3,13 +3,11 @@ import { useLoaderData } from "react-router-dom";
 import SecondaryHeading from "../../components/Headings/SecondaryHeading/SecondaryHeading";
 import SectionHeaderWrapper from "../../components/Wrappers/SectionHeaderWrapper/SectionHeaderWrapper";
 import SectionWrapper from "../../components/Wrappers/SectionWrapper/SectionWrapper";
-import OrderItem from "../CustomerOrders/OrderItem";
 import AdminOrderItem from "./AdminOrderItem";
 
 const AdminOrderList = () => {
   const loadedData = useLoaderData();
   const { orders } = loadedData?.data;
-  console.log(orders);
 
   return (
     <SectionWrapper>
