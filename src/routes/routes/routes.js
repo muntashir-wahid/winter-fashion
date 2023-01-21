@@ -13,6 +13,7 @@ import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import ProductDetails from "../../pages/ProductDetails/ProductDetails";
 import Register from "../../pages/Register/Register";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
@@ -47,12 +48,23 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      { path: ":id/orders", element: <CustomerOrders /> },
+      {
+        path: ":id/orders",
+        element: (
+          <PrivateRoute>
+            <CustomerOrders />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
     path: "/dashboard",
-    element: <DashBoard />,
+    element: (
+      <AdminRoute>
+        <DashBoard />
+      </AdminRoute>
+    ),
     children: [
       {
         index: true,

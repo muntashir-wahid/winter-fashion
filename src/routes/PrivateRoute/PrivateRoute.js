@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 import { CurrUserContext } from "../../store/CurrUser/CurrUserProvider";
 
 const PrivateRoute = ({ children }) => {
@@ -8,7 +9,7 @@ const PrivateRoute = ({ children }) => {
   const location = useLocation();
 
   if (isUserLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader className="min-h-screen w-full" />;
   }
 
   if (!currUser?._id) {

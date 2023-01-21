@@ -7,7 +7,7 @@ function App() {
   return (
     <Fragment>
       <Toaster position="top-center" reverseOrder={false} />
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </Fragment>
   );
 }

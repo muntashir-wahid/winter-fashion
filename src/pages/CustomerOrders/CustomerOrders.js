@@ -29,10 +29,13 @@ const CustomerOrders = () => {
     <SectionWrapper>
       <SectionHeaderWrapper>
         <SecondaryHeading>Your Orders {currUser?.name}</SecondaryHeading>
-        <p>
-          Thank you for ordering from your page. Stay with us and ware good.
-        </p>
+        <p>Thank you for ordering from our page. Stay with us and ware good.</p>
       </SectionHeaderWrapper>
+      {orders.length === 0 && (
+        <div className="text-center text-3xl font-semibold">
+          <h2>Your haven't orderd anythig from our page</h2>
+        </div>
+      )}
       <ul>
         {orders.length > 0 &&
           orders?.map((order) => (
