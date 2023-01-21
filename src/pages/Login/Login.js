@@ -54,7 +54,7 @@ const Login = () => {
           Please log in with your credential and buy some high-quality clothes.
         </p>
       </SectionHeaderWrapper>
-      <FromWrapper className="lg:max-w-xl">
+      <FromWrapper className="max-w-xl">
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           {/* User phone number input */}
 
@@ -109,10 +109,10 @@ const Login = () => {
             )}
           </div>
 
-          <input className="btn btn-primary mt-6" type="submit" value="Login" />
+          <input className="btn btn-primary mt-4" type="submit" value="Login" />
         </form>
         <p className="mt-2">
-          New to Winter Fashirn? Plese
+          New to <strong>Winter Fashirn</strong>? Plese
           <Link className="btn btn-link p-0 pl-1 lowercase" to="/register">
             register.
           </Link>
