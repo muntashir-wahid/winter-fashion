@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import ListItemWrapper from "../Wrappers/ListItemWrapper/ListItemWrapper";
 
 const CartItem = ({ itemId, onDeleteFromCart, onCheckOutPorduct }) => {
   const [cartItem, setCartItem] = useState(null);
@@ -15,26 +16,28 @@ const CartItem = ({ itemId, onDeleteFromCart, onCheckOutPorduct }) => {
   return (
     <li>
       {cartItem && (
-        <div className="flex justify-between">
-          <div>
+        <ListItemWrapper className="justify-between items-center text-sm md:text-base">
+          <div className="w-2/5">
             <img
-              className="h-24 md:h-20 xl:h-24"
+              className="h-16 md:h-20 xl:h-24 rounded-lg"
               src={cartItem.picture}
               alt={cartItem.name}
             />
-            <h3>{cartItem.name}</h3>
+            <h3 className="md:font-medium">{cartItem.name}</h3>
           </div>
-          <div>
-            <p>Price: {cartItem.price}</p>
-            <p>Delivery Cost: {cartItem.deliveryCost}</p>
-            <p>Total: {cartItem.price + cartItem.deliveryCost}</p>
+          <div className="md:w-3/12">
+            <p>Price: {cartItem.price}BDT</p>
+            <p>Delivery Cost: {cartItem.deliveryCost}BDT</p>
+            <p className="md:font-medium">
+              Total: {cartItem.price + cartItem.deliveryCost}BDT
+            </p>
           </div>
-          <div>
+          <div className="md:w-3/12 flex flex-col gap-2 justify-center items-center">
             <button
               onClick={onCheckOutPorduct}
               className="btn btn-primary btn-sm"
             >
-              Checkout
+              Buy
             </button>
             <button
               onClick={onDeleteFromCart}
@@ -43,7 +46,7 @@ const CartItem = ({ itemId, onDeleteFromCart, onCheckOutPorduct }) => {
               Delete
             </button>
           </div>
-        </div>
+        </ListItemWrapper>
       )}
     </li>
   );

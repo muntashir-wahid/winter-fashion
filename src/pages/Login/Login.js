@@ -92,7 +92,7 @@ const Login = () => {
             </label>
             <input
               {...register("password", {
-                required: "You have to inpur password for login",
+                required: "You have to input password for login",
                 minLength: {
                   value: 6,
                   message: "Password must be more or equal 6 charecters",
