@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import SecondaryHeading from "../../components/Headings/SecondaryHeading/SecondaryHeading";
 import FromErrorText from "../../components/Wrappers/FormWrapper/FromErrorText";
 import FromWrapper from "../../components/Wrappers/FormWrapper/FromWrapper";
@@ -7,14 +9,18 @@ import SectionHeaderWrapper from "../../components/Wrappers/SectionHeaderWrapper
 import SectionWrapper from "../../components/Wrappers/SectionWrapper/SectionWrapper";
 
 const AddCustomer = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  // Customer add handler function
   const formSubmitHandler = (data) => {
     const user = { ...data };
+
+    toast("Please wait!New customer is adding...");
 
     const formData = new FormData();
     const image = data.photo[0];
@@ -46,7 +52,17 @@ const AddCustomer = () => {
             }
           )
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+              // Successfull login
+              if (data.status === "success") {
+                toast.success("New customer added successfully");
+                navigate("/dashboard");
+              } else {
+                toast.error(
+                  "Your cant't use a phone number twice.Try again with some vaild input"
+                );
+              }
+            });
         }
       });
   };

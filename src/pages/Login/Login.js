@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SecondaryHeading from "../../components/Headings/SecondaryHeading/SecondaryHeading";
 import FromErrorText from "../../components/Wrappers/FormWrapper/FromErrorText";
@@ -9,20 +10,26 @@ import SectionWrapper from "../../components/Wrappers/SectionWrapper/SectionWrap
 import { CurrUserContext } from "../../store/CurrUser/CurrUserProvider";
 
 const Login = () => {
+  // -----------//
+  // Hook Calls //
+  // -----------//
   const { setCurrUser, setIsUpdated, setIsUserLoading } =
     useContext(CurrUserContext);
-
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  // ---------------------------- //
+  // User Login Handler Function //
+  // -------------------------- //
   const formSubmitHandler = (data) => {
+    toast("Please Wait!Logging in...");
+
     // User login
     fetch("https://winter-fashion-server.vercel.app/api/v1/users/login", {
       method: "POST",
@@ -33,17 +40,21 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        // Successfull login
         if (data.status === "success") {
+          toast.success("Login successfull!");
           const user = data?.data.user;
           setCurrUser(user);
           setIsUserLoading(false);
           setIsUpdated(true);
           localStorage.setItem("currUser", user._id);
           navigate(from, { replace: true });
+        } else {
+          toast.error(
+            "Phone number and password didn't match! Please try again"
+          );
         }
-      })
-      .catch((err) => console.log(err.message))
-      .finally(() => {});
+      });
   };
 
   return (
@@ -113,7 +124,10 @@ const Login = () => {
         </form>
         <p className="mt-2">
           New to <strong>Winter Fashion</strong>? Plese
-          <Link className="btn btn-link p-0 pl-1 lowercase" to="/register">
+          <Link
+            className="btn btn-link p-0 pl-1 lowercase text-base"
+            to="/register"
+          >
             register.
           </Link>
         </p>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import SecondaryHeading from "../../components/Headings/SecondaryHeading/SecondaryHeading";
 import FromErrorText from "../../components/Wrappers/FormWrapper/FromErrorText";
 import FromWrapper from "../../components/Wrappers/FormWrapper/FromWrapper";
@@ -11,9 +12,11 @@ const AddProduct = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const formSubmitHandler = (data) => {
+    toast("Please wait!Adding new product...");
     const product = { ...data };
 
     const formData = new FormData();
@@ -43,7 +46,16 @@ const AddProduct = () => {
             body: JSON.stringify(product),
           })
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+              if (data?.status === "success") {
+                toast.success("Product added successfully!");
+                reset();
+              } else {
+                toast.error(
+                  "Something went wrong!Try again with some valid data"
+                );
+              }
+            });
         }
       });
   };

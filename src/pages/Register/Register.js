@@ -1,6 +1,9 @@
 import React from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { CurrUserContext } from "../../store/CurrUser/CurrUserProvider";
 import SecondaryHeading from "../../components/Headings/SecondaryHeading/SecondaryHeading";
 import FromErrorText from "../../components/Wrappers/FormWrapper/FromErrorText";
 import FromWrapper from "../../components/Wrappers/FormWrapper/FromWrapper";
@@ -8,12 +11,19 @@ import SectionHeaderWrapper from "../../components/Wrappers/SectionHeaderWrapper
 import SectionWrapper from "../../components/Wrappers/SectionWrapper/SectionWrapper";
 
 const Register = () => {
+  // -------------  //
+  // Hook calls
+  // ------------ //
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
+  const { setCurrUser, setIsUserLoading, setIsUpdated } =
+    useContext(CurrUserContext);
 
+  // User Registration handler function
   const formSubmitHandler = (data) => {
     const user = { ...data };
 
@@ -21,7 +31,7 @@ const Register = () => {
     const image = data.photo[0];
 
     formData.append("image", image);
-
+    toast("Please wait!Creating Account...");
     // Host image to imageBB
     fetch(
       `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMAGE_BB_KEY}`,
@@ -47,9 +57,24 @@ const Register = () => {
             }
           )
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+              if (data?.status === "success") {
+                navigate("/");
+                const user = data?.data.user;
+                setCurrUser(user);
+                setIsUserLoading(false);
+                setIsUpdated(true);
+                localStorage.setItem("currUser", user._id);
+                toast.success("Congratulations!Account created successfully");
+              } else {
+                toast.error(
+                  "Something went wrong!You can't more then one accout with a number"
+                );
+              }
+            });
         }
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -163,7 +188,10 @@ const Register = () => {
         </form>
         <p className="mt-2">
           Already have an account? Plese
-          <Link className="btn btn-link p-0 pl-1 lowercase" to="/login">
+          <Link
+            className="btn btn-link p-0 pl-1 lowercase text-base"
+            to="/login"
+          >
             login.
           </Link>
         </p>

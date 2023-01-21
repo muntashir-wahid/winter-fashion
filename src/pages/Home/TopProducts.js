@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCardContainer from "../../components/Cards/ProductCard/ProductCardContainer";
 import SecondaryHeading from "../../components/Headings/SecondaryHeading/SecondaryHeading";
+import Loader from "../../components/Loader/Loader";
 import SectionHeaderWrapper from "../../components/Wrappers/SectionHeaderWrapper/SectionHeaderWrapper";
 import SectionWrapper from "../../components/Wrappers/SectionWrapper/SectionWrapper";
 
@@ -25,7 +26,11 @@ const TopProducts = () => {
             collections.
           </p>
         </SectionHeaderWrapper>
-        <ProductCardContainer products={products.slice(0, 3)} />
+        {products.length === 0 && <Loader className="w-full h-32" />}
+        {products.length > 0 && (
+          <ProductCardContainer products={products.slice(0, 3)} />
+        )}
+
         <div className="flex justify-center my-10">
           <Link className="btn btn-primary" to="/all-products">
             See all Products

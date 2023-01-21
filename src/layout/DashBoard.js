@@ -1,9 +1,12 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
+import Loader from "../components/Loader/Loader";
 import DashboardSideNav from "../components/NavBars/DashboardSideNav/DashboardSideNav";
 import DashBoardTopNav from "../components/NavBars/DashboardTopNav/DashBoardTopNav";
 
 const DashBoard = () => {
+  const { state } = useNavigation();
+
   return (
     <main>
       <DashBoardTopNav />
@@ -14,7 +17,8 @@ const DashBoard = () => {
           className="drawer-toggle"
         />
         <div className="drawer-content">
-          <Outlet />
+          {state === "idle" && <Outlet />}
+          {state === "loading" && <Loader className="min-h-screen w-full" />}
         </div>
         <DashboardSideNav />
       </div>

@@ -14,6 +14,11 @@ const AdminOrderList = () => {
       <SectionHeaderWrapper>
         <SecondaryHeading>All Order</SecondaryHeading>
       </SectionHeaderWrapper>
+      {orders.length === 0 && (
+        <div className="text-center text-3xl font-semibold">
+          <h2>There is no available order for right now</h2>
+        </div>
+      )}
       <ul>
         {orders.length > 0 &&
           orders?.map((order) => (
