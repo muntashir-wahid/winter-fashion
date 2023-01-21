@@ -60,6 +60,7 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/orders-list",
         element: <AdminOrderList />,
+        loader: async () => fetch("http://localhost:5000/api/v1/orders"),
       },
       {
         path: "/dashboard/product-list",

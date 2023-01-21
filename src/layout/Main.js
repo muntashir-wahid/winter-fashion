@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Outlet, useNavigation } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
-import TopNav from "../components/TopNav/TopNav";
+import TopNav from "../components/NavBars/TopNav/TopNav";
 
 const Main = () => {
   const { state } = useNavigation();

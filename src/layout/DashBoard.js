@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import DashboardSideNav from "../components/DashboardSideNav/DashboardSideNav";
-import DashBoardTopNav from "../components/DashboardTopNav/DashBoardTopNav";
+import DashboardSideNav from "../components/NavBars/DashboardSideNav/DashboardSideNav";
+import DashBoardTopNav from "../components/NavBars/DashboardTopNav/DashBoardTopNav";
 
 const DashBoard = () => {
   return (

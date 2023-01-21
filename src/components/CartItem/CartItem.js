@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const CartItem = ({ itemId, onDeleteFromCart }) => {
+const CartItem = ({ itemId, onDeleteFromCart, onCheckOutPorduct }) => {
   const [cartItem, setCartItem] = useState(null);
 
   useEffect(() => {
@@ -17,7 +17,11 @@ const CartItem = ({ itemId, onDeleteFromCart }) => {
       {cartItem && (
         <div className="flex justify-between">
           <div>
-            <img className="h-24" src={cartItem.picture} alt={cartItem.name} />
+            <img
+              className="h-24 md:h-20 xl:h-24"
+              src={cartItem.picture}
+              alt={cartItem.name}
+            />
             <h3>{cartItem.name}</h3>
           </div>
           <div>
@@ -26,7 +30,12 @@ const CartItem = ({ itemId, onDeleteFromCart }) => {
             <p>Total: {cartItem.price + cartItem.deliveryCost}</p>
           </div>
           <div>
-            <button className="btn btn-primary btn-sm">Checkout</button>
+            <button
+              onClick={onCheckOutPorduct}
+              className="btn btn-primary btn-sm"
+            >
+              Checkout
+            </button>
             <button
               onClick={onDeleteFromCart}
               className="btn btn-primary btn-sm"

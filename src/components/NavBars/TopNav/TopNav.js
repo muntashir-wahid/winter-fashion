@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { useContext } from "react";
-import { CurrUserContext } from "../../store/CurrUser/CurrUserProvider";
-import { CartContext } from "../../store/CartContext/CartContextProvider";
+import { CurrUserContext } from "../../../store/CurrUser/CurrUserProvider";
+import { CartContext } from "../../../store/CartContext/CartContextProvider";
 
 const navLinks = [
   {

@@ -1,9 +1,15 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
 const AdminOrderList = () => {
+  const loadedData = useLoaderData();
+  console.log(loadedData);
+
   return (
     <div>
-      <h1>Welcome to admin order list</h1>
+      {loadedData?.data?.orders?.map((order) => (
+        <h1 key={order._id}>{order.customerName}</h1>
+      ))}
     </div>
   );
 };

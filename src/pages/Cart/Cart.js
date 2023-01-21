@@ -4,7 +4,8 @@ import CartItem from "../../components/CartItem/CartItem";
 import { CartContext } from "../../store/CartContext/CartContextProvider";
 
 const Cart = () => {
-  const { cart, deleteFromCartHandler } = useContext(CartContext);
+  const { cart, deleteFromCartHandler, checkoutProductHandler } =
+    useContext(CartContext);
 
   return (
     <div>
@@ -15,6 +16,11 @@ const Cart = () => {
             key={cartItem._id}
             itemId={cartItem.productId}
             onDeleteFromCart={deleteFromCartHandler.bind(null, cartItem._id)}
+            onCheckOutPorduct={checkoutProductHandler.bind(
+              null,
+              cartItem._id,
+              cartItem.productId
+            )}
           />
         ))}
       </ul>

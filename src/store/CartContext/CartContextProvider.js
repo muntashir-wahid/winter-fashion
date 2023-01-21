@@ -7,6 +7,7 @@ const contextDefaultValue = {
   cart: [],
   addToCartHandler(cartProduct) {},
   deleteFromCartHandler(cartItem) {},
+  checkoutProductHandler(cartId, productId) {},
 };
 
 export const CartContext = createContext(contextDefaultValue);
@@ -63,10 +64,29 @@ const CartContextProvider = ({ children }) => {
       });
   };
 
+  const checkoutProductHandler = (cartId, productId) => {
+    const orderedProduct = {
+      productId,
+      customerName: currUser.name,
+      customerId: currUser._id,
+    };
+
+    fetch("http://localhost:5000/api/v1/orders", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(orderedProduct),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   const contextValue = {
     cart,
     addToCartHandler,
     deleteFromCartHandler,
+    checkoutProductHandler,
   };
 
   return (
